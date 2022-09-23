@@ -1,14 +1,11 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useMovieStore } from "../stores/movieList.js";
-import { onMounted } from "vue";
 import { useSearchBox } from "../stores/searchBox.js";
 import { useShoppingCart } from "../stores/shoppingCart.js";
 import { useFavoriteList } from "../stores/favoriteList.js";
 
 const { input } = storeToRefs(useSearchBox());
-
-const cart = useShoppingCart();
 
 const store = useMovieStore();
 
@@ -16,16 +13,8 @@ const favorites = useFavoriteList();
 
 const { movies } = storeToRefs(useMovieStore());
 
-onMounted(() => {
-    store.fetchMovies(input.value);
-})
-
 function addItemToCart(movie) {
     cart.addItem(movie);
-}
-
-function addItemToFavorites(movie) {
-    favorites.addItem(movie);
 }
 
 const posterPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
@@ -38,7 +27,7 @@ const posterPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
         <div class="Card" v-for='movie in movies.results' :key='movie.id'>
             <div class="CardContent">
                 <img class="Poster" :src='posterPath+movie.poster_path' :alt="movie.original_title">
-                <img class="likeButton" @click="addItemToFavorites(movie)" src="../assets/favorite-svgrepo-com.svg" alt="">
+                <img class="likeButton" src="../assets/favorite-svgrepo-com.svg" alt="">
                 <div>
                     <h4 class="MovieTitle">{{movie.original_title}}</h4>
                 </div>

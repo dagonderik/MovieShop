@@ -23,13 +23,17 @@ function handleInput() {
 
     <header>
         <div>
-            <img class="logo"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Blockbuster_logo.svg/2560px-Blockbuster_logo.svg.png"
-                alt="logo">
+            <router-link to="/">
+                <img class="logo"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Blockbuster_logo.svg/2560px-Blockbuster_logo.svg.png"
+                    alt="logo">
+            </router-link>
         </div>
         <input type="text" v-model="input" placeholder="Search movies..." @input="handleInput"/>
         <div>
-            <img class="navButtons" src="../assets/favorite-svgrepo-com.svg" alt="">
+            <router-link to="about">
+                <img class="navButtons" src="../assets/favorite-svgrepo-com.svg" alt="">
+            </router-link>
             <img class="navButtons" src="../assets/shopping-cart-outline-svgrepo-com.svg" alt="">
             <span class="badge" id="lblCartCount"> 0 </span>
         </div>

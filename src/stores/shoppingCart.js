@@ -1,19 +1,19 @@
 import { defineStore } from "pinia";
 
 
-export const useSearchBox = defineStore("searchBox", {
+export const useShoppingCart = defineStore("shoppingCart", {
   state: () => ({
-    input: "sonic",
+    cart: [],
   }),
   getters: {
     getInput(state) {
-      return state.input;
+      return state.cart;
     },
   },
   actions: {
-    changeInput(text) {
-        this.input = text;
-        console.log(this.input);
+    addItem(item) {
+        this.cart.push(item);
+        console.log(this.cart);
     },
   },
 });

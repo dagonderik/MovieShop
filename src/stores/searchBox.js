@@ -13,7 +13,7 @@ export const useSearchBox = defineStore("searchBox", {
   actions: {
     changeInput(text) {
         this.input = text;
-        console.log(this.input);
+        // console.log(this.input);
     },
   },
 });
