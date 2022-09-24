@@ -22,7 +22,7 @@ function emptyCart() {
 <template>
     <aside class="sidebar">
         <div class="sidebarTitle">
-            <h1> Meu Carrinho</h1>
+            <h2> Meu Carrinho</h2>
             <p class="emptyCart" @click="emptyCart">Esvaziar</p>
         </div>
         <div class="cartItems" v-for="item in cart" :key='item.id'>
@@ -39,21 +39,24 @@ function emptyCart() {
             <h3>Total:</h3>
             <span>{{'R$ '+ cart.length*9.99}}</span>
         </div>
-            <button class="buyButton">Finalizar compra</button>
+        <button class="buyButton" @click="$router.push('checkout')">Finalizar compra</button>
     </aside>
 
 </template>
 
 <style scoped>
-
+#sidebar {
+    display: grid;
+}
 
 aside {
     width: var(--sidebar-size);
     transition: 0.3s ease-out;
     height: 91vh;
     background-color: var(--color-background-mute);
-    flex: 1 15 auto;
-    display: grid; /* Maybe Change */
+    flex: 0 15 auto;
+    display: grid;
+    /* Maybe Change */
     border-color: rgb(65, 65, 65);
     border-style: solid;
     overflow: auto;
@@ -112,5 +115,4 @@ aside {
     border-radius: 10px;
     align-self: flex-end;
 }
-
 </style>

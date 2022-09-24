@@ -6,18 +6,27 @@ import { useSearchBox } from "../stores/searchBox.js";
 import { useShoppingCart } from "../stores/shoppingCart.js";
 import { useFavoriteList } from "../stores/favoriteList.js";
 
+import SideBar from "../components/SideBarCart.vue";
+import SideBarFav from "../components/SideBarFavorites.vue";
+// import { useGenresStore } from "../stores/genres.js";
+
 const { input } = storeToRefs(useSearchBox());
 
 const cart = useShoppingCart();
 
-const store = useMovieStore();
+const storeMovies = useMovieStore();
 
 const favorites = useFavoriteList();
+
+// const storeGenres = useGenresStore();
+
+// const { genres } = storeToRefs(useGenresStore());
 
 const { movies } = storeToRefs(useMovieStore());
 
 onMounted(() => {
-    store.fetchMovies(input.value);
+    storeMovies.fetchMovies(input.value);
+    // storeGenres.fetchGenres();
 })
 
 function addItemToCart(movie) {
@@ -38,20 +47,22 @@ const posterPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
         <div class="Card" v-for='movie in movies.results' :key='movie.id'>
             <div class="CardContent">
                 <img class="Poster" :src='posterPath+movie.poster_path' :alt="movie.original_title">
-                <img class="likeButton" @click="addItemToFavorites(movie)" src="../assets/favorite-svgrepo-com.svg" alt="">
+                <img class="likeButton" @click="addItemToFavorites(movie)" src="../assets/favorite-svgrepo-com.svg"
+                    alt="">
                 <div>
                     <h4 class="MovieTitle">{{movie.original_title}}</h4>
                 </div>
                 <div class="movieSpecs">
                     <img class="navButtons" src="../assets/star.svg" alt="">
                     <span class="badge" id="rating"> {{movie.vote_average}} </span>
-                    <!-- <span id="genre">genre</span>       {{movie.genre_ids[0]}} -->
                 </div>
                 <p id="genre">genre</p>
                 <button class="addButton" @click="addItemToCart(movie)">Adicionar</button>
             </div>
         </div>
     </div>
+    <SideBar />
+    <SideBarFav />
 
 </template>
 
@@ -64,6 +75,9 @@ const posterPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
     height: 390px;
     margin: 1rem 2rem;
     background-color: var(--color-background-mute);
+}
+.foote{
+    min-width: 100vw;
 }
 
 .searchResults {

@@ -29,7 +29,7 @@ function addItemToCart(movie) {
 <template>
     <div class="sidebarF">
         <div class="sidebarTitleF">
-            <h1> Meus Favoritos</h1>
+            <h2> Meus Favoritos</h2>
             <p class="emptyCartF" @click="emptyCart">Esvaziar</p>
         </div>
         <div class="cartItemsF" v-for="item in favorites" :key='item.id'>
@@ -55,7 +55,7 @@ function addItemToCart(movie) {
     transition: 0.3s ease-out;
     height: 91vh;
     background-color: var(--color-background-mute);
-    flex: 1 15 auto;
+    flex: 0 15 auto;
     display: grid;
     border-color: rgb(65, 65, 65);
     border-style: solid;
