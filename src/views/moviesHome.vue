@@ -63,7 +63,7 @@ const posterPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
     width: 150px;
     height: 390px;
     margin: 1rem 2rem;
-    background-color: rgb(32, 32, 32);
+    background-color: var(--color-background-mute);
 }
 
 .searchResults {
@@ -71,6 +71,8 @@ const posterPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    position: relative;
+    flex: 0 20 auto;
 }
 
 .Poster {
@@ -93,6 +95,8 @@ h4 {
 .addButton {
     width: 150px;
     align-self: flex-end;
+    cursor: pointer;
+    border-radius: 10px;
 }
 
 body {

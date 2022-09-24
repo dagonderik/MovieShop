@@ -12,8 +12,14 @@ export const useShoppingCart = defineStore("shoppingCart", {
   },
   actions: {
     addItem(item) {
-        this.cart.push(item);
-        console.log(this.cart);
+      this.cart.push(item);
+      console.log(this.cart);
     },
+    removeItem(item) {
+      this.cart.splice(item,1);
+    },
+    emptyCart() {
+      this.cart = [];
+    }
   },
 });

@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 
 export const useSearchBox = defineStore("searchBox", {
   state: () => ({
-    input: "sonic",
+    input: "barbie",
   }),
   getters: {
     getInput(state) {
@@ -13,7 +13,6 @@ export const useSearchBox = defineStore("searchBox", {
   actions: {
     changeInput(text) {
         this.input = text;
-        // console.log(this.input);
     },
   },
 });

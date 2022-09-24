@@ -15,5 +15,11 @@ export const useFavoriteList = defineStore("favoriteList", {
         this.favorites.push(item);
         console.log(this.favorites);
     },
+    removeItem(item) {
+      this.favorites.splice(item,1);
+    },
+    emptyCart() {
+      this.favorites = [];
+    }
   },
 });

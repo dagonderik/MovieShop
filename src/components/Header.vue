@@ -1,7 +1,14 @@
 <script setup>
 import { ref } from "vue";
+import { storeToRefs } from "pinia";
 import { useSearchBox } from "../stores/searchBox.js"
 import { useMovieStore } from "../stores/movieList.js"
+import { useShoppingCart } from "../stores/shoppingCart.js";
+import { useFavoriteList } from "../stores/favoriteList";
+
+const { cart } = storeToRefs(useShoppingCart());
+
+const { favorites } = storeToRefs(useFavoriteList());
 
 let input = ref("");
 
@@ -15,7 +22,27 @@ function handleInput() {
     }
 }
 
+var root = document.querySelector(':root');
+var rootStyles = getComputedStyle(root);
 
+
+function handleSidebarCart() {
+    if ( rootStyles.getPropertyValue('--sidebar-size') === rootStyles.getPropertyValue('--sidebar-min')){
+        root.style.setProperty('--sidebar-size', rootStyles.getPropertyValue('--sidebar-max') );
+        root.style.setProperty('--sidebarF-size', rootStyles.getPropertyValue('--sidebarF-min'));
+    } else {
+        root.style.setProperty('--sidebar-size', rootStyles.getPropertyValue('--sidebar-min'));
+    }
+}
+
+function handleSidebarFavorite() {
+    if ( rootStyles.getPropertyValue('--sidebarF-size') === rootStyles.getPropertyValue('--sidebarF-min')){
+        root.style.setProperty('--sidebarF-size', rootStyles.getPropertyValue('--sidebarF-max') );
+        root.style.setProperty('--sidebar-size', rootStyles.getPropertyValue('--sidebar-min'));
+    } else {
+        root.style.setProperty('--sidebarF-size', rootStyles.getPropertyValue('--sidebarF-min'));
+    }
+}
 
 </script>
 
@@ -31,11 +58,10 @@ function handleInput() {
         </div>
         <input type="text" v-model="input" placeholder="Search movies..." @input="handleInput"/>
         <div>
-            <router-link to="about">
-                <img class="navButtons" src="../assets/favorite-svgrepo-com.svg" alt="">
-            </router-link>
-            <img class="navButtons" src="../assets/shopping-cart-outline-svgrepo-com.svg" alt="">
-            <span class="badge" id="lblCartCount"> 0 </span>
+            <img class="navButtons" src="../assets/favorite-svgrepo-com.svg" alt="" @click="handleSidebarFavorite">
+            <span class="badge" id="lblCartCount"> {{favorites.length}} </span>
+            <img class="navButtons" src="../assets/shopping-cart-outline-svgrepo-com.svg" alt="" @click="handleSidebarCart">
+            <span class="badge" id="lblCartCount"> {{cart.length}} </span>
         </div>
     </header>
 
@@ -47,11 +73,10 @@ header {
     /* max-height: 100vh; */
     text-align: center;
     /* line-height: 1.5; */
-    background-color: rgb(54, 54, 54);
-}
-
-template {
-    background-color: #ff0000;
+    background-color: var(--color-background-mute);
+    position: relative;
+    top: 0;
+    width: auto;
 }
 
 .logo {
