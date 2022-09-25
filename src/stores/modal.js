@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 
-
 export const useModal = defineStore("modal", {
   state: () => ({
     visible: false,
@@ -13,9 +12,9 @@ export const useModal = defineStore("modal", {
   actions: {
     toggleModal() {
       if (!this.visible) {
-          this.visible = true;
+        this.visible = true;
       } else {
-          this.visible = false;
+        this.visible = false;
       }
     },
   },

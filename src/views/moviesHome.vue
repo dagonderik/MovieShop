@@ -76,7 +76,8 @@ const posterPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
     margin: 1rem 2rem;
     background-color: var(--color-background-mute);
 }
-.foote{
+
+.foote {
     min-width: 100vw;
 }
 
@@ -125,6 +126,7 @@ body {
     -webkit-border-radius: 9px;
     -moz-border-radius: 9px;
     border-radius: 9px;
+    vertical-align: super;
 }
 
 #rating {
@@ -132,8 +134,6 @@ body {
     background: #4d4d4d;
     color: #fff;
     padding: 0 5px;
-    vertical-align: top;
-    margin-left: -10px;
 }
 
 .movieSpecs {
@@ -155,13 +155,14 @@ body {
     top: 3px;
     right: 3px;
     height: 25px;
-    filter: invert(20%) sepia(99%) saturate(6705%) hue-rotate(4deg) brightness(113%) contrast(127%);
+    /* filter: invert(20%) sepia(99%) saturate(6705%) hue-rotate(4deg) brightness(113%) contrast(127%); */
 }
 
 @media(max-width: 700px) {
     .searchResults {
-        flex: 0 100 auto;   
+        flex: 0 100 auto;
     }
+
     /*
     .MovieTitle {
         text-overflow: ellipsis;
@@ -173,5 +174,4 @@ body {
         width: 75px;
     } */
 }
-
 </style>

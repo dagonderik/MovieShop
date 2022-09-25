@@ -17,7 +17,7 @@ const movieStore = useMovieStore();
 
 function handleInput() {
     store.changeInput(input);
-    if (input.value){
+    if (input.value) {
         movieStore.fetchMovies(input.value);
     }
 }
@@ -27,8 +27,8 @@ var rootStyles = getComputedStyle(root);
 
 
 function handleSidebarCart() {
-    if ( rootStyles.getPropertyValue('--sidebar-size') === rootStyles.getPropertyValue('--sidebar-min')){
-        root.style.setProperty('--sidebar-size', rootStyles.getPropertyValue('--sidebar-max') );
+    if (rootStyles.getPropertyValue('--sidebar-size') === rootStyles.getPropertyValue('--sidebar-min')) {
+        root.style.setProperty('--sidebar-size', rootStyles.getPropertyValue('--sidebar-max'));
         root.style.setProperty('--sidebarF-size', rootStyles.getPropertyValue('--sidebarF-min'));
     } else {
         root.style.setProperty('--sidebar-size', rootStyles.getPropertyValue('--sidebar-min'));
@@ -36,8 +36,8 @@ function handleSidebarCart() {
 }
 
 function handleSidebarFavorite() {
-    if ( rootStyles.getPropertyValue('--sidebarF-size') === rootStyles.getPropertyValue('--sidebarF-min')){
-        root.style.setProperty('--sidebarF-size', rootStyles.getPropertyValue('--sidebarF-max') );
+    if (rootStyles.getPropertyValue('--sidebarF-size') === rootStyles.getPropertyValue('--sidebarF-min')) {
+        root.style.setProperty('--sidebarF-size', rootStyles.getPropertyValue('--sidebarF-max'));
         root.style.setProperty('--sidebar-size', rootStyles.getPropertyValue('--sidebar-min'));
     } else {
         root.style.setProperty('--sidebarF-size', rootStyles.getPropertyValue('--sidebarF-min'));
@@ -52,15 +52,16 @@ function handleSidebarFavorite() {
         <div>
             <router-link to="/">
                 <img class="logo"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Blockbuster_logo.svg/2560px-Blockbuster_logo.svg.png"
+                    src="http://store-images.s-microsoft.com/image/apps.30553.13530700528390756.c83a6650-e301-453d-86c7-265631b3e9bc.f6548c93-82aa-4962-8942-09cacfabd515"
                     alt="logo">
             </router-link>
         </div>
-        <input type="text" v-model="input" placeholder="Search movies..." @input="handleInput"/>
+        <input type="text" v-model="input" placeholder="Search movies..." @input="handleInput" />
         <div>
             <img class="navButtons" src="../assets/favorite-svgrepo-com.svg" alt="" @click="handleSidebarFavorite">
             <span class="badge" id="lblCartCount"> {{favorites.length}} </span>
-            <img class="navButtons" src="../assets/shopping-cart-outline-svgrepo-com.svg" alt="" @click="handleSidebarCart">
+            <img class="navButtons" src="../assets/shopping-cart-outline-svgrepo-com.svg" alt=""
+                @click="handleSidebarCart">
             <span class="badge" id="lblCartCount"> {{cart.length}} </span>
         </div>
     </header>

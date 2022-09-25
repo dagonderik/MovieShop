@@ -15,15 +15,11 @@ let city = ref("");
 let state = ref("");
 
 const { cart } = storeToRefs(useShoppingCart());
-
 const { visible } = storeToRefs(useModal());
-
 const { name } = storeToRefs(useForm());
 
 const updateForm = useForm();
-
 const modalUpdate = useModal();
-
 const cartUpdate = useShoppingCart();
 
 const posterPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
@@ -37,38 +33,38 @@ function emptyCart() {
 }
 
 function maskPhone(phone) {
-    const part1 = phone.slice(0,2);
-    const part2 = phone.slice(2,7);
-    const part3 = phone.slice(7,11);
-    let newPhone  = `(${part1})${part2}-${part3}`;
+    const part1 = phone.slice(0, 2);
+    const part2 = phone.slice(2, 7);
+    const part3 = phone.slice(7, 11);
+    let newPhone = `(${part1})${part2}-${part3}`;
     updateForm.changePhone(newPhone);
 }
 
 function maskEmail(email) {
-	let maskedEmail = email.replace(/([^@\.])/g, "*").split('');
-	let previous	= "";
-	for(let i=0;i<maskedEmail.length;i++){
-		if (i<=1 || previous == "." || previous == "@"){
-			maskedEmail[i] = email[i];
-		}
-		previous = email[i];
-	}
-	console.log(maskedEmail.join('')); 
+    let maskedEmail = email.replace(/([^@\.])/g, "*").split('');
+    let previous = "";
+    for (let i = 0; i < maskedEmail.length; i++) {
+        if (i <= 1 || previous == "." || previous == "@") {
+            maskedEmail[i] = email[i];
+        }
+        previous = email[i];
+    }
+    console.log(maskedEmail.join(''));
 }
 
 function maskCep(cep) {
-    const part1 = cep.slice(0,5);
-    const part2 = cep.slice(5,8);
-    let newPhone  = `${part1}-${part2}`;
+    const part1 = cep.slice(0, 5);
+    const part2 = cep.slice(5, 8);
+    let newPhone = `${part1}-${part2}`;
     updateForm.changeCep(newPhone);
 }
 
 function maskCpf(cpf) {
-    const part1 = cpf.slice(0,3);
-    const part2 = cpf.slice(3,6);
-    const part3 = cpf.slice(6,9);
-    const part4 = cpf.slice(9,11);
-    let newPhone  = `${part1}.${part2}.${part3}-${part4}`;
+    const part1 = cpf.slice(0, 3);
+    const part2 = cpf.slice(3, 6);
+    const part3 = cpf.slice(6, 9);
+    const part4 = cpf.slice(9, 11);
+    let newPhone = `${part1}.${part2}.${part3}-${part4}`;
     updateForm.changeCpf(newPhone);
 }
 
@@ -95,14 +91,22 @@ function updateState(state) {
         <div class="side">
             <h1>Finalizar Compra</h1>
             <form class="form" @submit="checkForm">
-                <input class="dataInput" v-model="fullName" id="Name" @input="updateName(fullName)" placeholder="Nome Completo" type="text">
-                <input class="dataInput" v-model="cpf" id="cpf" @input="maskCpf(cpf)" minlength="11" maxlength="11" placeholder="CPF" type="text">
-                <input class="dataInput" v-model="phone" id="phone" @input="maskPhone(phone)" placeholder="Celular" minlength="10" maxlength="11" type="text">
-                <input class="dataInput" v-model="email" id="email" @input="maskEmail(email)" placeholder="E-mail" type="email">
-                <input class="dataInput" v-model="cep" id="cep" @input="maskCep(cep)" placeholder="CEP" minlength="8" maxlength="8" type="text">
-                <input class="dataInput" v-model="address" id="address" @input="updateAddress(address)" placeholder="Endereço" type="text">
-                <input class="dataInput" v-model="city" id="city" @input="updateCity(city)" placeholder="Cidade" type="text">
-                <input class="dataInput" v-model="state" id="state" @input="updateState(state)" placeholder="Estado" type="text">
+                <input class="dataInput" v-model="fullName" id="Name" @input="updateName(fullName)"
+                    placeholder="Nome Completo" type="text">
+                <input class="dataInput" v-model="cpf" id="cpf" @input="maskCpf(cpf)" minlength="11" maxlength="11"
+                    placeholder="CPF" type="text">
+                <input class="dataInput" v-model="phone" id="phone" @input="maskPhone(phone)" placeholder="Celular"
+                    minlength="10" maxlength="11" type="text">
+                <input class="dataInput" v-model="email" id="email" @input="maskEmail(email)" placeholder="E-mail"
+                    type="email">
+                <input class="dataInput" v-model="cep" id="cep" @input="maskCep(cep)" placeholder="CEP" minlength="8"
+                    maxlength="8" type="text">
+                <input class="dataInput" v-model="address" id="address" @input="updateAddress(address)"
+                    placeholder="Endereço" type="text">
+                <input class="dataInput" v-model="city" id="city" @input="updateCity(city)" placeholder="Cidade"
+                    type="text">
+                <input class="dataInput" v-model="state" id="state" @input="updateState(state)" placeholder="Estado"
+                    type="text">
             </form>
         </div>
         <aside class="sidebar">
@@ -147,7 +151,8 @@ function updateState(state) {
 
                         <div class="modal-footer">
                             <slot name="footer">
-                                <button class="modal-default-button" @click="modalUpdate.toggleModal">Ir para loja</button>
+                                <button class="modal-default-button" @click="modalUpdate.toggleModal">Ir para
+                                    loja</button>
                             </slot>
                         </div>
                     </div>
@@ -345,6 +350,7 @@ aside {
 .modal-footer {
     display: grid;
 }
+
 .modal-default-button {
     height: 50px;
     border-radius: 10px;
@@ -381,8 +387,8 @@ aside {
     }
 
     .modal-container {
-    width: 70vw;
-    
-}
+        width: 70vw;
+
+    }
 }
 </style>

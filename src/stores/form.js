@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { reactive, computed } from 'vue';
+import { reactive, computed } from "vue";
 
 export const useForm = defineStore("form", {
   state: () => ({
@@ -12,8 +12,7 @@ export const useForm = defineStore("form", {
     city: "",
     state: "",
   }),
-  getters: {
-  },
+  getters: {},
   actions: {
     changePhone(value) {
       this.phone = value;

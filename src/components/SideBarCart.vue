@@ -45,7 +45,6 @@ function emptyCart() {
 </template>
 
 <style scoped>
-
 .sidebar {
     display: grid;
 }
@@ -122,14 +121,13 @@ aside {
         display: flex;
         flex-wrap: wrap;
     }
+
     .cartItems {
         display: grid;
     }
 }
 
-#price{
+#price {
     margin-top: 3px;
 }
-
-
 </style>

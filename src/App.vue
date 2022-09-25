@@ -16,12 +16,10 @@ import Header from "./components/Header.vue";
 </template>
 
 <style scoped>
-
 .container {
   display: flex;
   justify-content: space-evenly;
 }
-
 </style>
 
 

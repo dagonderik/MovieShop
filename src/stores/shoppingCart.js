@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 
-
 export const useShoppingCart = defineStore("shoppingCart", {
   state: () => ({
     cart: [],
@@ -17,7 +16,7 @@ export const useShoppingCart = defineStore("shoppingCart", {
       console.log(this.cart);
     },
     removeItem(item) {
-      this.cart.splice(item,1);
+      this.cart.splice(item, 1);
     },
     emptyCart() {
       this.cart = [];

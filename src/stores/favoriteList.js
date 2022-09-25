@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 
-
 export const useFavoriteList = defineStore("favoriteList", {
   state: () => ({
     favorites: [],
@@ -12,14 +11,14 @@ export const useFavoriteList = defineStore("favoriteList", {
   },
   actions: {
     addItem(item) {
-        this.favorites.push(item);
-        console.log(this.favorites);
+      this.favorites.push(item);
+      console.log(this.favorites);
     },
     removeItem(item) {
-      this.favorites.splice(item,1);
+      this.favorites.splice(item, 1);
     },
     emptyCart() {
       this.favorites = [];
-    }
+    },
   },
 });
