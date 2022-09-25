@@ -1,41 +1,32 @@
-# MovieShop
+# 🎬 MovieShop 🎬
 
-This template should help get you started developing with Vue 3 in Vite.
+This project utilizes the TMDB API to create a functional movie online store
 
-## Recommended IDE Setup
+## 🛠️ Functionality
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### This project utilizes the vue Router to create a one page application.
 
-## Customize configuration
+![home page](https://i.imgur.com/tXWcWEC.png)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### The cart and favorites list was added using a sidebar to easy access.
 
-## Project Setup
+![side bar](https://i.imgur.com/ETrkz8T.png)
 
-```sh
-npm install
-```
+### The checkout screen was implemented using the Router to separate it from the main store page.
 
-### Compile and Hot-Reload for Development
+![checkout screen](https://i.imgur.com/CJvPCCT.png)
 
-```sh
-npm run dev
-```
+### The app has a unique layout focusing on mobile views to ensure usability and responsivity
 
-### Compile and Minify for Production
+![main page](https://i.imgur.com/ahwkXu8.jpg)
 
-```sh
-npm run build
-```
+![side bar](https://i.imgur.com/toK8rFr.jpg)
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+![checkout](https://i.imgur.com/BPFPPdp.jpg)
 
-```sh
-npm run test:unit
-```
+## 💻 Technologies
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- [VueJS](https://vuejs.org/)
+- [Pinia](https://pinia.vuejs.org/)
+- [Axios](https://axios-http.com/)
+- [Vue Router](https://router.vuejs.org/)
