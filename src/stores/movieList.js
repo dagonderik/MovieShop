@@ -1,16 +1,23 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
+/**
+ * This store is used to load and store the list of movies using axios
+ */
 export const useMovieStore = defineStore("movieStore", {
   state: () => ({
+    /**
+     * Array that holds the objects containing the movielist result of the search input
+     */
     movies: [],
   }),
   getters: {
-    getMovies(state) {
-      return state.movies;
-    },
   },
   actions: {
+    /**
+     * Calls the API and receives a list of movies based on the search criteria
+     * @param {string} input - Value used as search parameter to return a new list of movies
+     */
     async fetchMovies(input) {
       try {
         const data = await axios.get(

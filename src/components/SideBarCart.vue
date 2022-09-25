@@ -2,17 +2,32 @@
 import { storeToRefs } from "pinia";
 import { useShoppingCart } from "../stores/shoppingCart.js";
 
-
+/**
+ * Sets the variables to access the store content
+ */
 const { cart } = storeToRefs(useShoppingCart());
 
+/**
+ * Sets the variables to access the store actions
+ */
 const cartUpdate = useShoppingCart();
 
+/**
+ * Sets the url path of the posters
+ */
 const posterPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
 
+/**
+ * Removes the selected movies from the cart array
+ * @param {object} item Movie that will be removed
+ */
 function removeItemFromCart(item) {
     cartUpdate.removeItem(item);
 }
 
+/**
+ * Removes all the objects inside the cart array
+ */
 function emptyCart() {
     cartUpdate.emptyCart();
 }
@@ -56,7 +71,6 @@ aside {
     background-color: var(--color-background-mute);
     flex: 0 15 auto;
     display: grid;
-    /* Maybe Change */
     border-color: rgb(65, 65, 65);
     border-style: solid;
     overflow: auto;
@@ -125,9 +139,5 @@ aside {
     .cartItems {
         display: grid;
     }
-}
-
-#price {
-    margin-top: 3px;
 }
 </style>

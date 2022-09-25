@@ -3,23 +3,41 @@ import { storeToRefs } from "pinia";
 import { useFavoriteList } from "../stores/favoriteList";
 import { useShoppingCart } from "../stores/shoppingCart.js";
 
-
+/**
+ * Sets the variables to access the store content
+ */
 const { favorites } = storeToRefs(useFavoriteList());
 
+/**
+ * Sets the variables to access the store actions
+ */
 const cart = useShoppingCart();
-
 const favoritesUpdate = useFavoriteList();
 
+/**
+ * Sets the url path of the posters
+ */
 const posterPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
 
+/**
+ * Removes the selected movies from the favorites array
+ * @param {object} item Movie that will be removed
+ */
 function removeItemFromFavorites(item) {
     favoritesUpdate.removeItem(item);
 }
 
+/**
+ * Removes all the objects inside the favorites array
+ */
 function emptyCart() {
     favoritesUpdate.emptyCart();
 }
 
+/**
+ * Adds the selected movie from the favorites array to the cart array
+ * @param {object} item Movie that will be added to the cart array
+ */
 function addItemToCart(movie) {
     cart.addItem(movie);
 }

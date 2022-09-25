@@ -5,34 +5,42 @@ import { onMounted } from "vue";
 import { useSearchBox } from "../stores/searchBox.js";
 import { useShoppingCart } from "../stores/shoppingCart.js";
 import { useFavoriteList } from "../stores/favoriteList.js";
-
 import SideBar from "../components/SideBarCart.vue";
 import SideBarFav from "../components/SideBarFavorites.vue";
-// import { useGenresStore } from "../stores/genres.js";
 
+/**
+ * Sets the variables to access the store content
+ */
 const { input } = storeToRefs(useSearchBox());
-
-const cart = useShoppingCart();
-
-const storeMovies = useMovieStore();
-
-const favorites = useFavoriteList();
-
-// const storeGenres = useGenresStore();
-
-// const { genres } = storeToRefs(useGenresStore());
-
 const { movies } = storeToRefs(useMovieStore());
 
+/**
+ * Sets the variables to access the store actions
+ */
+const cart = useShoppingCart();
+const storeMovies = useMovieStore();
+const favorites = useFavoriteList();
+
+
+/**
+ * Request the API the first list of the movies shown
+ */
 onMounted(() => {
     storeMovies.fetchMovies(input.value);
-    // storeGenres.fetchGenres();
 })
 
+/**
+ * Adds the selected movie to the cart
+ * @param {object} movie - Holds the information of the selected movie 
+ */
 function addItemToCart(movie) {
     cart.addItem(movie);
 }
 
+/**
+ * Adds the selected movie to the favorites list
+ * @param {object} movie - Holds the information of the selected movie
+ */
 function addItemToFavorites(movie) {
     favorites.addItem(movie);
 }
@@ -56,7 +64,6 @@ const posterPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
                     <img class="navButtons" src="../assets/star.svg" alt="">
                     <span class="badge" id="rating"> {{movie.vote_average}} </span>
                 </div>
-                <!-- <p id="genre">genre</p> -->
                 <button class="addButton" @click="addItemToCart(movie)">Adicionar</button>
             </div>
         </div>
@@ -155,23 +162,11 @@ body {
     top: 3px;
     right: 3px;
     height: 25px;
-    /* filter: invert(20%) sepia(99%) saturate(6705%) hue-rotate(4deg) brightness(113%) contrast(127%); */
 }
 
 @media(max-width: 700px) {
     .searchResults {
         flex: 0 100 auto;
     }
-
-    /*
-    .MovieTitle {
-        text-overflow: ellipsis;
-    }
-    .Card {
-        width: 75px;
-    }
-    .Poster {
-        width: 75px;
-    } */
 }
 </style>

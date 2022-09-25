@@ -6,15 +6,33 @@ import { useMovieStore } from "../stores/movieList.js"
 import { useShoppingCart } from "../stores/shoppingCart.js";
 import { useFavoriteList } from "../stores/favoriteList";
 
+/**
+ * Sets the variables to access the store content
+ */
 const { cart } = storeToRefs(useShoppingCart());
-
 const { favorites } = storeToRefs(useFavoriteList());
 
-let input = ref("");
-
+/**
+ * Sets the variables to access the store actions
+ */
 const store = useSearchBox();
 const movieStore = useMovieStore();
 
+/**
+ * Holds the input value on the searchbar
+ */
+let input = ref("");
+
+/**
+ * Sets the variables used to manipulate the size of the sidebar to control the 
+ * open and close function
+ */
+var root = document.querySelector(':root');
+var rootStyles = getComputedStyle(root);
+
+/**
+ * Update the movies list based on the input on the searchbar
+ */
 function handleInput() {
     store.changeInput(input);
     if (input.value) {
@@ -22,10 +40,9 @@ function handleInput() {
     }
 }
 
-var root = document.querySelector(':root');
-var rootStyles = getComputedStyle(root);
-
-
+/**
+ * Manipulate the size of the cart sidebar to control the open and close function
+ */
 function handleSidebarCart() {
     if (rootStyles.getPropertyValue('--sidebar-size') === rootStyles.getPropertyValue('--sidebar-min')) {
         root.style.setProperty('--sidebar-size', rootStyles.getPropertyValue('--sidebar-max'));
@@ -35,6 +52,9 @@ function handleSidebarCart() {
     }
 }
 
+/**
+ * Manipulate the size of the favorites sidebar to control the open and close function
+ */
 function handleSidebarFavorite() {
     if (rootStyles.getPropertyValue('--sidebarF-size') === rootStyles.getPropertyValue('--sidebarF-min')) {
         root.style.setProperty('--sidebarF-size', rootStyles.getPropertyValue('--sidebarF-max'));
@@ -70,10 +90,7 @@ function handleSidebarFavorite() {
 
 <style scoped>
 header {
-    /* display: grid; */
-    /* max-height: 100vh; */
     text-align: center;
-    /* line-height: 1.5; */
     background-color: var(--color-background-mute);
     position: relative;
     top: 0;

@@ -5,6 +5,9 @@ import { useShoppingCart } from "../stores/shoppingCart.js";
 import { useModal } from "../stores/modal.js";
 import { useForm } from "../stores/form.js";
 
+/**
+ * Sets the variables to hold the input values from the form
+ */
 let fullName = ref("");
 let phone = ref("");
 let cpf = ref("");
@@ -14,24 +17,45 @@ let address = ref("");
 let city = ref("");
 let state = ref("");
 
+/**
+ * Sets the variables to access the store content
+ */
 const { cart } = storeToRefs(useShoppingCart());
 const { visible } = storeToRefs(useModal());
 const { name } = storeToRefs(useForm());
 
+/**
+ * Sets the variables to access the store actions
+ */
 const updateForm = useForm();
 const modalUpdate = useModal();
 const cartUpdate = useShoppingCart();
 
+/**
+ * Sets the url path of the posters
+ */
 const posterPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
 
+/**
+ * Calls the action on useShoppingCart store to remove the movie from the cart
+ * @param {number} item - index of the item that will be removed
+ */
 function removeItemFromCart(item) {
     cartUpdate.removeItem(item);
 }
 
+/**
+ * Calls the action on useShoppingCart store to empty the cart
+ */
 function emptyCart() {
     cartUpdate.emptyCart();
 }
 
+/**
+ * Masks the phone number to fit the pattern (xx)xxxxx-xxxx before passing it to the 
+ * useForm store 
+ * @param {string} phone - Holds the typed user phone number
+ */
 function maskPhone(phone) {
     const part1 = phone.slice(0, 2);
     const part2 = phone.slice(2, 7);
@@ -40,6 +64,10 @@ function maskPhone(phone) {
     updateForm.changePhone(newPhone);
 }
 
+/**
+ * Masks the email to fit the pattern x***@xxx.cxx before passing it to the useForm store
+ * @param {string} email - Holds the typed user email
+ */
 function maskEmail(email) {
     let maskedEmail = email.replace(/([^@\.])/g, "*").split('');
     let previous = "";
@@ -52,6 +80,10 @@ function maskEmail(email) {
     console.log(maskedEmail.join(''));
 }
 
+/**
+ * Masks the CEP to fit the pattern xxxxx-xxx before passing it to the useForm store
+ * @param {string} cep - Holds the typed user CEP
+ */
 function maskCep(cep) {
     const part1 = cep.slice(0, 5);
     const part2 = cep.slice(5, 8);
@@ -59,6 +91,10 @@ function maskCep(cep) {
     updateForm.changeCep(newPhone);
 }
 
+/**
+ * Masks the CPF to fit the pattern xxx.xxx.xxx-xx before passing it to the useForm store
+ * @param {string} cpf - Holds the typed user CPF
+ */
 function maskCpf(cpf) {
     const part1 = cpf.slice(0, 3);
     const part2 = cpf.slice(3, 6);
@@ -68,21 +104,43 @@ function maskCpf(cpf) {
     updateForm.changeCpf(newPhone);
 }
 
+/**
+ * Stores the user name in the useForm store
+ * @param {string} fullName - Holds the typed user name
+ */
 function updateName(fullName) {
     updateForm.changeName(fullName);
 }
 
+/**
+ * Stores the user address in the useForm store
+ * @param {strin} address - Holds the typed user address
+ */
 function updateAddress(address) {
     updateForm.changeAddress(address);
 }
 
+/**
+ * Stores the user city information in the useForm store
+ * @param {string} city - Holds the typed user city information
+ */
 function updateCity(city) {
     updateForm.changeCity(city);
 }
 
+/**
+ * Stores the user state information in the useForm store
+ * @param {string} state - Holds the typed user state information
+ */
 function updateState(state) {
     updateForm.changeState(state);
 }
+
+function finishCheckout() {
+    modalUpdate.toggleModal();
+    cartUpdate.emptyCart();
+}
+
 </script>
         
 <template>
@@ -151,7 +209,7 @@ function updateState(state) {
 
                         <div class="modal-footer">
                             <slot name="footer">
-                                <button class="modal-default-button" @click="modalUpdate.toggleModal">Ir para
+                                <button class="modal-default-button" @click="finishCheckout">Ir para
                                     loja</button>
                             </slot>
                         </div>
@@ -184,7 +242,6 @@ function updateState(state) {
 }
 
 .side {
-    /* display: grid; */
     margin-top: calc(100vh/2 - 400px);
 }
 
@@ -244,12 +301,10 @@ h1 {
 }
 
 aside {
-    /* height: 91vh; */
     background-color: var(--color-background-mute);
     margin-top: calc(100vh/2 - 400px);
     flex: 0 15 auto;
     display: grid;
-    /* Maybe Change */
     border-color: rgb(65, 65, 65);
     border-style: solid;
     overflow: auto;
@@ -355,15 +410,6 @@ aside {
     height: 50px;
     border-radius: 10px;
 }
-
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
 
 .modal-enter-from,
 .modal-leave-to {
