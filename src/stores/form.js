@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-
+import { reactive, computed } from 'vue';
 
 export const useForm = defineStore("form", {
   state: () => ({
