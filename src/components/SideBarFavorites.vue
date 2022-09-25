@@ -40,8 +40,10 @@ function addItemToCart(movie) {
             <div>
                 <p>R$9,99</p>
             </div>
-            <img class="trashIconF" src="../assets/shopping-cart-outline-svgrepo-com.svg" alt="" @click="addItemToCart(item)">
-            <img class="trashIconF" src="../assets/icons8-trash.svg" alt="" @click="removeItemFromFavorites(item)">
+            <div>
+                <img class="trashIconF" src="../assets/shopping-cart-outline-svgrepo-com.svg" alt="" @click="addItemToCart(item)">
+                <img class="trashIconF" src="../assets/icons8-trash.svg" alt="" @click="removeItemFromFavorites(item)">
+            </div>
         </div>
     </div>
 
@@ -77,6 +79,7 @@ function addItemToCart(movie) {
     width: 25px;
     align-self: flex-start;
     cursor: pointer;
+    margin: 5px;
 }
 
 .cartItemsF {
@@ -99,6 +102,16 @@ function addItemToCart(movie) {
 
 .emptyCartF:hover {
     text-decoration: underline;
+}
+
+@media(max-width: 700px) {
+    .sidebarF {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .cartItemsF {
+        display: grid;
+    }
 }
 
 </style>

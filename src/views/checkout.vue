@@ -1,8 +1,10 @@
 <script setup>
 import { storeToRefs } from "pinia";
+import { ref } from "vue";
 import { useShoppingCart } from "../stores/shoppingCart.js";
-import Modal from "../components/Modal.vue";
+// import Modal from "../components/Modal.vue";
 
+let input = ref("");
 
 const { cart } = storeToRefs(useShoppingCart());
 
@@ -18,6 +20,12 @@ function emptyCart() {
     cartUpdate.emptyCart();
 }
 
+function checkout() {
+
+}
+
+console.log("input  "+input);
+
 </script>
         
 <template>
@@ -27,10 +35,10 @@ function emptyCart() {
             <h1>Finalizar Compra</h1>
             <form class="form">
                 <input class="dataInput" id="Name" placeholder="Nome Completo" type="text">
-                <input class="dataInput" id="cpf" placeholder="CPF" type="text">
-                <input class="dataInput" id="phone" placeholder="Celular" type="text">
-                <input class="dataInput" id="email" placeholder="E-mail" type="text">
-                <input class="dataInput" id="cep" placeholder="CEP" type="text">
+                <input class="dataInput" id="cpf" placeholder="CPF" type="number">
+                <input class="dataInput" v-model="input" id="phone" placeholder="Celular" type="tel">
+                <input class="dataInput" id="email" placeholder="E-mail" type="email">
+                <input class="dataInput" id="cep" placeholder="CEP" type="number">
                 <input class="dataInput" id="address" placeholder="Endereço" type="text">
                 <input class="dataInput" id="city" placeholder="Cidade" type="text">
                 <input class="dataInput" id="state" placeholder="Estado" type="text">
@@ -55,9 +63,9 @@ function emptyCart() {
                 <h3>Total:</h3>
                 <span>{{'R$ '+ cart.length*9.99}}</span>
             </div>
-            <button class="buyButton" @click="$router.push('checkout')">Finalizar</button>
+            <button class="buyButton" @click="$router.push('modal')">Finalizar</button>
         </aside>
-        
+
     </div>
 
 </template>

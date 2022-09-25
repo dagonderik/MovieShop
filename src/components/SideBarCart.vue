@@ -37,7 +37,7 @@ function emptyCart() {
         </div>
         <div class="totalPrice">
             <h3>Total:</h3>
-            <span>{{'R$ '+ cart.length*9.99}}</span>
+            <span id="price">{{'R$ '+ cart.length*9.99}}</span>
         </div>
         <button class="buyButton" @click="$router.push('checkout')">Finalizar compra</button>
     </aside>
@@ -45,7 +45,8 @@ function emptyCart() {
 </template>
 
 <style scoped>
-#sidebar {
+
+.sidebar {
     display: grid;
 }
 
@@ -115,4 +116,20 @@ aside {
     border-radius: 10px;
     align-self: flex-end;
 }
+
+@media(max-width: 700px) {
+    .sidebar {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .cartItems {
+        display: grid;
+    }
+}
+
+#price{
+    margin-top: 3px;
+}
+
+
 </style>

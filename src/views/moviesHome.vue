@@ -89,6 +89,12 @@ const posterPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
     flex: 0 20 auto;
 }
 
+@media(max-width: 700px) {
+    .searchResults {
+        flex: 0 100 auto;   
+    }
+}
+
 .Poster {
     width: 150px;
     height: 250px;
