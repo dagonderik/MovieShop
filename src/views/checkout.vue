@@ -206,13 +206,13 @@ function finishCheckout() {
                                 Sua compra foi finalizada com sucesso!
                             </h2>
                         </div>
-
-                        <div class="modal-footer">
-                            <slot name="footer">
-                                <button class="modal-default-button" @click="finishCheckout">Ir para
-                                    loja</button>
-                            </slot>
-                        </div>
+                        <router-link to="/">
+                            <div class="modal-footer">
+                                <slot name="footer">
+                                    <button class="modal-default-button" @click="finishCheckout">Ir para loja</button>
+                                </slot>
+                            </div>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -362,6 +362,7 @@ aside {
     margin: 20px;
     border-radius: 10px;
     align-self: flex-end;
+    cursor: pointer;
 }
 
 /* Modal  */
@@ -409,6 +410,7 @@ aside {
 .modal-default-button {
     height: 50px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .modal-enter-from,

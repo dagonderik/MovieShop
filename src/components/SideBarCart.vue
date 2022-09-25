@@ -128,6 +128,11 @@ aside {
     margin: 20px;
     border-radius: 10px;
     align-self: flex-end;
+    cursor: pointer;
+}
+
+#price {
+    margin-top: 3px;
 }
 
 @media(max-width: 700px) {
