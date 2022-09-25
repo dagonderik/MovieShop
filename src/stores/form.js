@@ -13,20 +13,39 @@ export const useForm = defineStore("form", {
     state: "",
   }),
   getters: {
-    getInput(state) {
-      return state.favorites;
-    },
   },
   actions: {
-    addItem(item) {
-        this.favorites.push(item);
-        console.log(this.favorites);
+    changePhone(value) {
+      this.phone = value;
+      console.log(this.phone);
     },
-    removeItem(item) {
-      this.favorites.splice(item,1);
+    changeEmail(value) {
+      this.email = value;
+      console.log(this.email);
     },
-    emptyCart() {
-      this.favorites = [];
-    }
+    changeCep(value) {
+      this.cep = value;
+      console.log(this.cep);
+    },
+    changeCpf(value) {
+      this.cpf = value;
+      console.log(this.cpf);
+    },
+    changeName(value) {
+      this.name = value;
+      console.log(this.name);
+    },
+    changeAddress(value) {
+      this.address = value;
+      console.log(this.address);
+    },
+    changeCity(value) {
+      this.city = value;
+      console.log(this.city);
+    },
+    changeState(value) {
+      this.state = value;
+      console.log(this.state);
+    },
   },
 });

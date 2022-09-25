@@ -2,11 +2,27 @@
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
 import { useShoppingCart } from "../stores/shoppingCart.js";
-// import Modal from "../components/Modal.vue";
+import { useModal } from "../stores/modal.js";
+import { useForm } from "../stores/form.js";
 
-let input = ref("");
+let fullName = ref("");
+let phone = ref("");
+let cpf = ref("");
+let email = ref("");
+let cep = ref("");
+let address = ref("");
+let city = ref("");
+let state = ref("");
 
 const { cart } = storeToRefs(useShoppingCart());
+
+const { visible } = storeToRefs(useModal());
+
+const { name } = storeToRefs(useForm());
+
+const updateForm = useForm();
+
+const modalUpdate = useModal();
 
 const cartUpdate = useShoppingCart();
 
@@ -20,12 +36,57 @@ function emptyCart() {
     cartUpdate.emptyCart();
 }
 
-function checkout() {
-
+function maskPhone(phone) {
+    const part1 = phone.slice(0,2);
+    const part2 = phone.slice(2,7);
+    const part3 = phone.slice(7,11);
+    let newPhone  = `(${part1})${part2}-${part3}`;
+    updateForm.changePhone(newPhone);
 }
 
-console.log("input  "+input);
+function maskEmail(email) {
+	let maskedEmail = email.replace(/([^@\.])/g, "*").split('');
+	let previous	= "";
+	for(let i=0;i<maskedEmail.length;i++){
+		if (i<=1 || previous == "." || previous == "@"){
+			maskedEmail[i] = email[i];
+		}
+		previous = email[i];
+	}
+	console.log(maskedEmail.join('')); 
+}
 
+function maskCep(cep) {
+    const part1 = cep.slice(0,5);
+    const part2 = cep.slice(5,8);
+    let newPhone  = `${part1}-${part2}`;
+    updateForm.changeCep(newPhone);
+}
+
+function maskCpf(cpf) {
+    const part1 = cpf.slice(0,3);
+    const part2 = cpf.slice(3,6);
+    const part3 = cpf.slice(6,9);
+    const part4 = cpf.slice(9,11);
+    let newPhone  = `${part1}.${part2}.${part3}-${part4}`;
+    updateForm.changeCpf(newPhone);
+}
+
+function updateName(fullName) {
+    updateForm.changeName(fullName);
+}
+
+function updateAddress(address) {
+    updateForm.changeAddress(address);
+}
+
+function updateCity(city) {
+    updateForm.changeCity(city);
+}
+
+function updateState(state) {
+    updateForm.changeState(state);
+}
 </script>
         
 <template>
@@ -33,15 +94,15 @@ console.log("input  "+input);
     <div class="checkoutContainer">
         <div class="side">
             <h1>Finalizar Compra</h1>
-            <form class="form">
-                <input class="dataInput" id="Name" placeholder="Nome Completo" type="text">
-                <input class="dataInput" id="cpf" placeholder="CPF" type="number">
-                <input class="dataInput" v-model="input" id="phone" placeholder="Celular" type="tel">
-                <input class="dataInput" id="email" placeholder="E-mail" type="email">
-                <input class="dataInput" id="cep" placeholder="CEP" type="number">
-                <input class="dataInput" id="address" placeholder="Endereço" type="text">
-                <input class="dataInput" id="city" placeholder="Cidade" type="text">
-                <input class="dataInput" id="state" placeholder="Estado" type="text">
+            <form class="form" @submit="checkForm">
+                <input class="dataInput" v-model="fullName" id="Name" @input="updateName(fullName)" placeholder="Nome Completo" type="text">
+                <input class="dataInput" v-model="cpf" id="cpf" @input="maskCpf(cpf)" minlength="11" maxlength="11" placeholder="CPF" type="text">
+                <input class="dataInput" v-model="phone" id="phone" @input="maskPhone(phone)" placeholder="Celular" minlength="10" maxlength="11" type="text">
+                <input class="dataInput" v-model="email" id="email" @input="maskEmail(email)" placeholder="E-mail" type="email">
+                <input class="dataInput" v-model="cep" id="cep" @input="maskCep(cep)" placeholder="CEP" minlength="8" maxlength="8" type="text">
+                <input class="dataInput" v-model="address" id="address" @input="updateAddress(address)" placeholder="Endereço" type="text">
+                <input class="dataInput" v-model="city" id="city" @input="updateCity(city)" placeholder="Cidade" type="text">
+                <input class="dataInput" v-model="state" id="state" @input="updateState(state)" placeholder="Estado" type="text">
             </form>
         </div>
         <aside class="sidebar">
@@ -63,9 +124,36 @@ console.log("input  "+input);
                 <h3>Total:</h3>
                 <span>{{'R$ '+ cart.length*9.99}}</span>
             </div>
-            <button class="buyButton" @click="$router.push('modal')">Finalizar</button>
+            <button class="buyButton" @click="modalUpdate.toggleModal">Finalizar</button>
         </aside>
 
+        <!-- Modal Code -->
+        <template v-if="visible">
+            <div class="modal-mask">
+                <div class="modal-wrapper">
+                    <div class="modal-container">
+
+                        <div class="modal-header">
+                            <h1 name="header">
+                                Obrigado {{name}}!
+                            </h1>
+                        </div>
+
+                        <div class="modal-body">
+                            <h2 name="body">
+                                Sua compra foi finalizada com sucesso!
+                            </h2>
+                        </div>
+
+                        <div class="modal-footer">
+                            <slot name="footer">
+                                <button class="modal-default-button" @click="modalUpdate.toggleModal">Ir para loja</button>
+                            </slot>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
     </div>
 
 </template>
@@ -216,6 +304,72 @@ aside {
     align-self: flex-end;
 }
 
+/* Modal  */
+.modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: table;
+    transition: opacity 0.3s ease;
+}
+
+.modal-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.modal-container {
+    width: 40vw;
+    margin: 0px auto;
+    padding: 20px 30px;
+    background-color: var(--color-background);
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+    transition: all 0.3s ease;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-header h3 {
+    margin-top: 0;
+}
+
+.modal-body {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.modal-footer {
+    display: grid;
+}
+.modal-default-button {
+    height: 50px;
+    border-radius: 10px;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter-from,
+.modal-leave-to {
+    opacity: 0;
+}
+
+.modal-enter-active .modal-container,
+.modal-leave-active .modal-container {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
 @media (max-width: 800px) {
     .checkoutContainer {
         display: flex;
@@ -225,6 +379,10 @@ aside {
     .sidebar {
         width: 100vw;
     }
+
+    .modal-container {
+    width: 70vw;
     
+}
 }
 </style>

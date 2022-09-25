@@ -56,7 +56,7 @@ const posterPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
                     <img class="navButtons" src="../assets/star.svg" alt="">
                     <span class="badge" id="rating"> {{movie.vote_average}} </span>
                 </div>
-                <p id="genre">genre</p>
+                <!-- <p id="genre">genre</p> -->
                 <button class="addButton" @click="addItemToCart(movie)">Adicionar</button>
             </div>
         </div>
@@ -87,12 +87,6 @@ const posterPath = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
     justify-content: center;
     position: relative;
     flex: 0 20 auto;
-}
-
-@media(max-width: 700px) {
-    .searchResults {
-        flex: 0 100 auto;   
-    }
 }
 
 .Poster {
@@ -144,6 +138,7 @@ body {
 
 .movieSpecs {
     align-self: flex-end;
+    justify-self: center;
 }
 
 #genre {
@@ -162,4 +157,21 @@ body {
     height: 25px;
     filter: invert(20%) sepia(99%) saturate(6705%) hue-rotate(4deg) brightness(113%) contrast(127%);
 }
+
+@media(max-width: 700px) {
+    .searchResults {
+        flex: 0 100 auto;   
+    }
+    /*
+    .MovieTitle {
+        text-overflow: ellipsis;
+    }
+    .Card {
+        width: 75px;
+    }
+    .Poster {
+        width: 75px;
+    } */
+}
+
 </style>

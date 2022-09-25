@@ -4,6 +4,7 @@ import { defineStore } from "pinia";
 export const useShoppingCart = defineStore("shoppingCart", {
   state: () => ({
     cart: [],
+    modal: false,
   }),
   getters: {
     getInput(state) {
@@ -20,6 +21,6 @@ export const useShoppingCart = defineStore("shoppingCart", {
     },
     emptyCart() {
       this.cart = [];
-    }
+    },
   },
 });
